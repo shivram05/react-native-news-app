@@ -1,5 +1,5 @@
 import { View, StyleSheet, Pressable } from "react-native";
-import { Card, useTheme } from "react-native-paper";
+import { Button, Card, useTheme } from "react-native-paper";
 import React from "react";
 import { NewsData } from "../utils/types";
 import { NavigationProp } from "@react-navigation/native";
@@ -25,12 +25,13 @@ const CardItem = (props: Props) => {
   };
 
   return (
+    
     <Pressable onPress={handlePress}>
       <Card style={styles.card}>
         <Card.Cover borderRadius={10} source={{ uri: props.image_url }} />
         <Card.Title
           title={props.title}
-          subtitle={props.description.split("\n")[0]}
+          subtitle={props.description}
           titleNumberOfLines={1}
         ></Card.Title>
       </Card>

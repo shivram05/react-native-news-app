@@ -9,7 +9,7 @@ import CardItem from "../components/CardItem";
 const categories = ["Technology", "Sports", "Politics", "Health", "Business"];
 const API_KEY = "pub_24268d6826dae2b2722b7b44da98b905993fc";
 
-const Home = (props:ComponentNavigationProps) => {
+const Home = (props: ComponentNavigationProps) => {
   const [selectedCategories, setselectedCategories] = useState<NewsData[]>([]);
   const [newsData, setnewsData] = useState([]);
   const [nextPage, setnextPage] = useState("");
@@ -27,16 +27,17 @@ const Home = (props:ComponentNavigationProps) => {
       selectedCategories.length > 0
         ? `&category=${selectedCategories.join()}`
         : ""
-    }${nextPage?.length>0 ? `&page=${nextPage}`: ''}`;
+    }${nextPage?.length > 0 ? `&page=${nextPage}` : ""}`;
 
     console.log(BASE_URL);
 
     try {
       await fetch(BASE_URL)
         .then((res) => res.json())
-        .then((data) => {setnewsData((prev)=>[...prev,...data.results]) 
-           setnextPage(data.nextPage)}
-        );
+        .then((data) => {
+          setnewsData((prev) => [...prev, ...data.results]);
+          setnextPage(data.nextPage);
+        });
     } catch (err) {
       console.log(err);
     }
@@ -77,12 +78,12 @@ const Home = (props:ComponentNavigationProps) => {
       </View>
 
       <FlatList
-      onEndReached={handleSubmit}
+        onEndReached={handleSubmit}
         style={styles.flatlist}
         data={newsData}
         renderItem={({ item }) => (
           <CardItem
-          navigation = {props.navigation}
+            navigation={props.navigation}
             category={item.category}
             content={item.content}
             country={item.country}
